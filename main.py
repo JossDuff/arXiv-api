@@ -86,6 +86,6 @@ if __name__ == "__main__":
         print(f"{category}: {count}")
 
     # Save the DataFrame to a CSV file
-    papers_df.to_csv('arxiv_papers_last_year.csv', index=False)
+    papers_df.to_csv('papers.csv', index=False)
 
-    print("Data saved to arxiv_papers_last_year.csv successfully.")
+    print("Data saved successfully.")

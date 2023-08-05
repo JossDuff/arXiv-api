@@ -32,7 +32,8 @@ if __name__ == "__main__":
     last_year_str = last_year.strftime("%Y-%m-%d")
 
     # Construct the initial query with other search criteria
-    query = f"all:blockchain%20NOT%20cat:cs.AI"
+    # don't care about AI, multimedia (MM), 
+    query = f"all:blockchain%20NOT%20cat:cs.AI%20NOT%20cat:cs.MM%20NOT%20cat:cs.CY"
     results_per_iteration = 100
     total_results = 1000  # Adjust this based on the number of papers you want to fetch
 
@@ -51,14 +52,26 @@ if __name__ == "__main__":
 
                 # Check if the paper's submission date is within the last year
                 if published_date >= last_year_str:
+
                     # Get the categories for the paper
                     categories = [cat.term for cat in entry.tags if cat.term.startswith("cs.")]
                     #categories = categories = [cat.term for cat in entry.tags]
+
+                    # Access the author affiliations
+                    #affiliations = [author.get('arxiv_affiliation', '') for author in entry.authors]
+
                     if categories:
+                        # Access the author affiliations
+                        # affiliations = []
+                        # for author in entry.authors:
+                        #     for affiliation in author.get('arxiv_affiliation', []):
+                        #         affiliations.append(affiliation)
+
                         papers_list.append({
                             'Title': title,
                             'Published Date': published_date,
                             'Categories': categories,
+                            #'Affiliations': affiliations
                         })
 
                         # Count the occurrences of each category
